@@ -1,0 +1,25 @@
+name: Publicar Pagina 2023-1069 Parcial 1
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clon de repo
+        uses: actions/checkout@v3
+
+      - name: Setup de node js 
+        uses: actions/setup-node@v3
+        with:
+            node-version: '18' 
+
+      - name: Instalacion de  Surge       
+        run: npm install --global surge
+
+      - name: Publicacion de pagina
+        run: surge --project ./ --domain electiva-alexndr.surge.sh --token ${{ secrets.SURGE_API_KEY }}
